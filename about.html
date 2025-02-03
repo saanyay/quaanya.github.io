@@ -1,9 +1,12 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Quaanyaland</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap'); /* Bubble Font */
+
         body {
             display: flex;
             flex-direction: column;
@@ -12,16 +15,23 @@
             height: 100vh;
             margin: 0;
             background-color: #FFC0CB; /* Baby Pink */
-            font-family: Arial, sans-serif;
+            font-family: 'Luckiest Guy', cursive; /* Bubble-style font */
             text-align: center;
             color: white;
         }
+        h1, h2, p {
+            text-shadow: 3px 3px 0px black, -3px -3px 0px black, 3px -3px 0px black, -3px 3px 0px black;
+        }
         h1 {
-            font-size: 36px;
+            font-size: 48px;
             margin-bottom: 10px;
         }
+        h2 {
+            font-size: 32px;
+            margin-top: 20px;
+        }
         p {
-            font-size: 18px;
+            font-size: 22px;
             width: 80%;
             max-width: 600px;
             line-height: 1.5;
@@ -36,6 +46,8 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s;
+            font-family: 'Luckiest Guy', cursive;
+            text-shadow: 2px 2px 0px black;
         }
         .button:hover {
             background-color: #B03A6B;
