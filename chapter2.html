@@ -129,9 +129,19 @@
       display: none;
     }
 
-    .response-buttons {
+    .response-subtitle {
       position: absolute;
       top: 50%;
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      display: none;
+    }
+
+    .response-buttons {
+      position: absolute;
+      top: 60%;
       display: flex;
       gap: 20px;
       display: none;
@@ -173,6 +183,7 @@
   </div>
 
   <div class="response-title" id="responseTitle">What will you respond?</div>
+  <div class="response-subtitle" id="responseSubtitle">What is your response?</div>
   <div class="response-buttons" id="responseButtons">
     <button class="response-btn" onclick="chooseResponse('yes')">Yes of course Saanyay</button>
     <button class="response-btn" onclick="chooseResponse('no')">No...soz</button>
@@ -188,6 +199,7 @@
     const queenBubble = document.getElementById('queenBubble');
     const nextButton = document.getElementById('nextButton');
     const responseTitle = document.getElementById('responseTitle');
+    const responseSubtitle = document.getElementById('responseSubtitle');
     const responseButtons = document.getElementById('responseButtons');
 
     function showNextMessage() {
@@ -206,6 +218,7 @@
         saanyayBubble.style.display = 'block';
         setTimeout(() => {
           responseTitle.style.display = 'block';
+          responseSubtitle.style.display = 'block';
           responseButtons.style.display = 'flex';
         }, 1000);
         currentMessage++;
@@ -214,6 +227,7 @@
 
     function chooseResponse(response) {
       responseTitle.style.display = 'none';
+      responseSubtitle.style.display = 'none';
       responseButtons.style.display = 'none';
 
       if (response === 'yes') {
