@@ -22,24 +22,26 @@
     }
 
     .container {
-      width: 350px;
-      height: 600px;
+      width: 600px;
+      height: 500px;
       background-color: #fff;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 20px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .phone-screen {
+    .scene {
+      position: relative;
       width: 100%;
       height: 100%;
-      overflow-y: scroll;
-      padding-right: 10px;
       display: flex;
-      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-end;
     }
 
     .stick-figure {
@@ -72,31 +74,27 @@
       margin: 5px auto;
     }
 
-    .text-bubble {
-      max-width: 70%;
-      padding: 10px;
-      margin: 5px 0;
+    .speech-bubble {
+      position: absolute;
+      top: -40px;
+      background-color: #fff;
       border-radius: 15px;
+      padding: 10px;
       font-size: 16px;
-      display: inline-block;
+      max-width: 150px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .saanyay-bubble {
+      left: 60px; /* Position slightly to the right of Saanyay */
       background-color: #d1e7ff;
-      text-align: right;
-      border-radius: 15px 15px 0 15px;
+      text-align: left;
     }
 
     .queen-bubble {
+      right: 60px; /* Position slightly to the left of Queen */
       background-color: #ffe0e0;
       text-align: left;
-      border-radius: 15px 15px 15px 0;
-    }
-
-    .message-container {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
     }
 
     .next-btn {
@@ -107,20 +105,28 @@
       border-radius: 10px;
       cursor: pointer;
       font-size: 16px;
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
-    .next-btn:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <div class="phone-screen" id="phoneScreen">
-      <!-- Stick figures and messages will appear here -->
+    <div class="scene">
+      <div class="stick-figure" id="saanyay">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs"></div>
+        <div class="speech-bubble saanyay-bubble" id="saanyayBubble"></div>
+      </div>
+
+      <div class="stick-figure" id="queen">
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="legs"></div>
+        <div class="speech-bubble queen-bubble" id="queenBubble"></div>
+      </div>
     </div>
     <button class="next-btn" id="nextButton">Next</button>
   </div>
@@ -135,71 +141,35 @@
 
     let currentMessage = 0;
 
-    const phoneScreen = document.getElementById('phoneScreen');
+    const saanyayBubble = document.getElementById('saanyayBubble');
+    const queenBubble = document.getElementById('queenBubble');
     const nextButton = document.getElementById('nextButton');
 
-    function createStickFigure(sender) {
-      const figure = document.createElement('div');
-      figure.classList.add('stick-figure');
-
-      const head = document.createElement('div');
-      head.classList.add('head');
-      figure.appendChild(head);
-
-      const body = document.createElement('div');
-      body.classList.add('body');
-      figure.appendChild(body);
-
-      const legs = document.createElement('div');
-      legs.classList.add('legs');
-      figure.appendChild(legs);
-
-      if (sender === 'Saanyay') {
-        figure.style.marginLeft = 'auto'; // Position Saanyay on the right
-      } else {
-        figure.style.marginRight = 'auto'; // Position Queen on the left
-      }
-
-      return figure;
-    }
-
-    function createMessageBubble(sender, text) {
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('message-container');
-
-      const figure = createStickFigure(sender);
-      messageDiv.appendChild(figure);
-
-      const bubble = document.createElement('div');
-      bubble.classList.add('text-bubble');
-      if (sender === 'Saanyay') {
-        bubble.classList.add('saanyay-bubble');
-      } else {
-        bubble.classList.add('queen-bubble');
-      }
-      bubble.textContent = text;
-
-      messageDiv.appendChild(bubble);
-
-      phoneScreen.appendChild(messageDiv);
-    }
-
-    function loadNextMessage() {
+    function showNextMessage() {
       if (currentMessage < conversation.length) {
         const { sender, text } = conversation[currentMessage];
-        createMessageBubble(sender, text);
+
+        if (sender === 'Saanyay') {
+          saanyayBubble.textContent = text;
+          saanyayBubble.style.display = 'block';
+        } else {
+          queenBubble.textContent = text;
+          queenBubble.style.display = 'block';
+        }
+
         currentMessage++;
       }
 
+      // Hide the next button after all messages are shown
       if (currentMessage === conversation.length) {
-        nextButton.style.display = 'none'; // Hide the next button after all messages
+        nextButton.style.display = 'none';
       }
     }
 
-    nextButton.addEventListener('click', loadNextMessage);
+    nextButton.addEventListener('click', showNextMessage);
 
-    // Start the first message
-    loadNextMessage();
+    // Show first message
+    showNextMessage();
   </script>
 
 </body>
