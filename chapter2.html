@@ -24,11 +24,11 @@
 
     .scene {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between; /* Spread the figures apart */
       align-items: flex-end;
       position: absolute;
-      bottom: 25%; /* Adjusted to give more space for the button */
-      width: 100%;
+      bottom: 25%;
+      width: 80%; /* Increase width for more spacing */
     }
 
     .stick-figure {
@@ -53,7 +53,7 @@
     }
 
     .stick-figure .legs {
-      width: 10px; /* Increased thickness */
+      width: 10px;
       height: 20px;
       background-color: #000;
       margin-top: 5px;
@@ -63,24 +63,24 @@
 
     .speech-bubble {
       position: absolute;
-      top: -70px; /* Moved higher up */
+      top: -80px; /* Moved higher up */
       background-color: #fff;
       border-radius: 15px;
       padding: 15px;
       font-size: 18px;
-      max-width: 300px; /* Made the text bubble wider */
+      max-width: 350px; /* Wider bubbles */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      white-space: pre-wrap; /* To allow for multiline text */
+      white-space: pre-wrap;
     }
 
     .saanyay-bubble {
-      left: 60px; /* Position slightly to the right of Saanyay */
+      left: -150px; /* Move further left */
       background-color: #d1e7ff;
       text-align: left;
     }
 
     .queen-bubble {
-      right: 60px; /* Position slightly to the left of Queen */
+      right: -150px; /* Move further right */
       background-color: #ffe0e0;
       text-align: left;
     }
@@ -94,12 +94,14 @@
       cursor: pointer;
       font-size: 16px;
       position: absolute;
-      top: 15%; /* Moved the button much higher */
+      top: 10%; /* Move the button way higher */
     }
 
   </style>
 </head>
 <body>
+
+  <button class="next-btn" id="nextButton">Next</button>
 
   <div class="scene">
     <div class="stick-figure" id="saanyay">
@@ -116,8 +118,6 @@
       <div class="speech-bubble queen-bubble" id="queenBubble"></div>
     </div>
   </div>
-
-  <button class="next-btn" id="nextButton">Next</button>
 
   <script>
     const conversation = [
@@ -148,7 +148,6 @@
         currentMessage++;
       }
 
-      // Hide the next button after all messages are shown
       if (currentMessage === conversation.length) {
         nextButton.style.display = 'none';
       }
@@ -156,7 +155,6 @@
 
     nextButton.addEventListener('click', showNextMessage);
 
-    // Show first message
     showNextMessage();
   </script>
 
