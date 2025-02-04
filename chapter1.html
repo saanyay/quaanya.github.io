@@ -85,6 +85,17 @@
       background-color: #ccc;
       cursor: not-allowed;
     }
+
+    .reload-btn {
+      background-color: #7fffd4;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -93,22 +104,31 @@
       <!-- Messages will be appended here -->
     </div>
     <button class="next-btn" id="nextButton">Next</button>
+    <button class="reload-btn" id="reloadButton" style="display:none;">Start New Conversation</button>
   </div>
 
   <script>
     const messages = [
-      { sender: 'Saanyay', text: 'Hey! My name is Saanyay' },
-      { sender: 'Queen', text: 'Hi! I\'m Queen' },
-      { sender: 'Saanyay', text: 'You\'re cool. Wanna hangout' },
-      { sender: 'Queen', text: 'Yes! Let me come over and see your Darth Vader pen holder!' },
-      { sender: 'Saanyay', text: 'Dope does thursday night work?' },
-      { sender: 'Queen', text: 'Perfect! Can\'t wait 😊' },
-      { sender: 'Saanyay', text: 'See you then!'}
+      { sender: 'Saanyay', text: 'Hey! How was your day?' },
+      { sender: 'Queen', text: 'It was great! Just finished some work. How about you?' },
+      { sender: 'Saanyay', text: 'Same here, just got done with class. Want to hang out soon?' },
+      { sender: 'Queen', text: 'I\'d love that! When are you free?' },
+      { sender: 'Saanyay', text: 'How about this weekend?' },
+      { sender: 'Queen', text: 'Perfect! Can\'t wait 😊' }
+    ];
+
+    const newConversationMessages = [
+      { sender: 'Saanyay', text: 'I had so much fun today!' },
+      { sender: 'Queen', text: 'Same! I had a great time 😊' },
+      { sender: 'Saanyay', text: 'Let\'s date?' },
+      { sender: 'Queen', text: 'Yes, I would love that!' }
     ];
 
     let currentMessage = 0;
+    let currentConversation = messages;
     const phoneScreen = document.getElementById('phoneScreen');
     const nextButton = document.getElementById('nextButton');
+    const reloadButton = document.getElementById('reloadButton');
 
     // Function to create a new message bubble
     function createMessageBubble(sender, text) {
@@ -138,18 +158,30 @@
       messageDiv.style.display = 'block'; // Show the message
     }
 
-    nextButton.addEventListener('click', () => {
-      if (currentMessage < messages.length) {
-        const { sender, text } = messages[currentMessage];
+    function loadNextMessage() {
+      if (currentMessage < currentConversation.length) {
+        const { sender, text } = currentConversation[currentMessage];
         createMessageBubble(sender, text);
         currentMessage++;
       }
 
-      // Disable the button if all messages are shown
-      if (currentMessage === messages.length) {
-        nextButton.disabled = true;
+      // If we've finished all the messages in the current conversation
+      if (currentMessage === currentConversation.length) {
+        nextButton.style.display = 'none';
+        reloadButton.style.display = 'block'; // Show the reload button to start a new conversation
       }
+    }
+
+    // Click handler for the "Next" button
+    nextButton.addEventListener('click', loadNextMessage);
+
+    // Click handler for the "Start New Conversation" button
+    reloadButton.addEventListener('click', () => {
+      location.reload(); // Reload the page to restart the conversation
     });
+
+    // Start the initial conversation
+    loadNextMessage();
   </script>
 </body>
 </html>
