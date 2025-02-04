@@ -79,16 +79,31 @@
       Our 2nd Year of Dating, we experienced a lot of new things...  
       Let's recap some:
     </div>
-    <div class="question">
+
+    <!-- First Question -->
+    <div class="question" id="question1">
       What's the order of concerts we went to?
     </div>
-    <div class="options">
+    <div class="options" id="options1">
       <button class="option-btn" onclick="selectOption('Itsmurph')">Itsmurph</button>
       <button class="option-btn" onclick="selectOption('Childish Gambino')">Childish Gambino</button>
       <button class="option-btn" onclick="selectOption('Mitski')">Mitski</button>
     </div>
     <div class="selected-order" id="selectedOrder">Your order: </div>
-    <button class="next-question" id="nextQuestion" onclick="nextQuestion()">Next Question</button>
+    <button class="next-question" id="nextQuestion1" onclick="showSecondQuestion()">Next Question</button>
+
+    <!-- Second Question (Hidden Initially) -->
+    <div class="question" id="question2" style="display: none;">
+      How many photobooth photos did we take?
+    </div>
+    <div class="options" id="options2" style="display: none;">
+      <button class="option-btn" onclick="checkPhotoboothAnswer(6)">6</button>
+      <button class="option-btn" onclick="checkPhotoboothAnswer(7)">7</button>
+      <button class="option-btn" onclick="checkPhotoboothAnswer(8)">8</button>
+      <button class="option-btn" onclick="checkPhotoboothAnswer(9)">9</button>
+    </div>
+    <button class="next-question" id="nextQuestion2" style="display: none;" onclick="nextQuestion()">Next Question</button>
+
   </div>
 
   <script>
@@ -108,7 +123,7 @@
 
     function checkOrder() {
       if (JSON.stringify(userOrder) === JSON.stringify(correctOrder)) {
-        document.getElementById("nextQuestion").style.display = "block";
+        document.getElementById("nextQuestion1").style.display = "block";
       } else {
         alert("Oops! Try again.");
         userOrder = [];
@@ -116,9 +131,27 @@
       }
     }
 
+    function showSecondQuestion() {
+      document.getElementById("question1").style.display = "none";
+      document.getElementById("options1").style.display = "none";
+      document.getElementById("selectedOrder").style.display = "none";
+      document.getElementById("nextQuestion1").style.display = "none";
+
+      document.getElementById("question2").style.display = "block";
+      document.getElementById("options2").style.display = "flex";
+    }
+
+    function checkPhotoboothAnswer(choice) {
+      if (choice === 8) {
+        document.getElementById("nextQuestion2").style.display = "block";
+      } else {
+        alert("Nope! Try again.");
+      }
+    }
+
     function nextQuestion() {
       alert("Correct! Moving to the next question...");
-      // Redirect to next question or continue quiz logic here
+      // Redirect or continue quiz logic here
     }
   </script>
 
