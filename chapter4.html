@@ -68,12 +68,6 @@
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
     }
 
-    .confetti {
-      position: absolute;
-      pointer-events: none;
-      z-index: 1000;
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -97,15 +91,20 @@
     </div>
 
     <div class="button-container" id="button-container" style="display: none;">
-      <button class="proposal-btn" id="yesButton" onclick="revealConfetti()">Yes</button>
-      <button class="proposal-btn" id="noButton" onclick="moveNoButton()">No</button>
+      <button class="proposal-btn" id="yesButton">Yes</button>
+      <button class="proposal-btn" id="noButton">No</button>
     </div>
   </div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1000;"></canvas>
+
+  <!-- Include canvas-confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 
   <script>
     let currentStep = 1;
     const texts = document.querySelectorAll('.proposal-text');
-    let noButtonClicked = false;
 
     // Animate text step-by-step
     function animateProposal() {
@@ -120,52 +119,22 @@
       }
     }
 
-    // Final interaction - Confetti effect
-    function revealConfetti() {
-      const confettiContainer = document.createElement('div');
-      confettiContainer.classList.add('confetti');
-      document.body.appendChild(confettiContainer);
+    // Confetti effect when "Yes" is clicked
+    document.getElementById('yesButton').addEventListener('click', () => {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    });
 
-      // Simple confetti effect using random divs
-      for (let i = 0; i < 100; i++) {
-        const confettiPiece = document.createElement('div');
-        confettiPiece.style.width = '10px';
-        confettiPiece.style.height = '10px';
-        confettiPiece.style.backgroundColor = getRandomColor();
-        confettiPiece.style.position = 'absolute';
-        confettiPiece.style.left = `${Math.random() * 100}%`;
-        confettiPiece.style.top = `${Math.random() * 100}%`;
-        confettiPiece.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
-        confettiContainer.appendChild(confettiPiece);
-      }
-
-      alert("SHE SAID YES! ❤️ (P.S. Check your real-life doorstep for a surprise!)");
-    }
-
-    // Random color generator for confetti
-    function getRandomColor() {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
-
-    // Move the 'No' button randomly when clicked
-    function moveNoButton() {
-      if (!noButtonClicked) {
-        noButtonClicked = true;
-        const noButton = document.getElementById('noButton');
-        noButton.style.transition = 'all 0.5s ease-in-out';
-
-        setInterval(() => {
-          noButton.style.position = 'absolute';
-          noButton.style.left = `${Math.random() * 90}%`;
-          noButton.style.top = `${Math.random() * 90}%`;
-        }, 1000);
-      }
-    }
+    // Move the "No" button to a random spot when clicked
+    document.getElementById('noButton').addEventListener('click', () => {
+      const noButton = document.getElementById('noButton');
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${Math.random() * 90}%`;
+      noButton.style.top = `${Math.random() * 90}%`;
+    });
 
     // Start animation when page loads
     window.onload = animateProposal;
