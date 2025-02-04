@@ -37,6 +37,8 @@
       height: 100%;
       overflow-y: scroll;
       padding-right: 10px;
+      display: flex;
+      flex-direction: column-reverse; /* Make new messages appear below */
     }
 
     .text-bubble {
@@ -83,77 +85,67 @@
       background-color: #ccc;
       cursor: not-allowed;
     }
-
-    .message-container {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .user .contact-name,
-    .girlfriend .contact-name {
-      margin-top: 0;
-      margin-bottom: 5px;
-      font-size: 14px;
-      color: #888;
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="phone-screen">
-      <div class="message-container">
-        <div class="text-bubble user">
-          <div class="contact-name">You</div>
-          <p>Hey! How was your day?</p>
-        </div>
-        <div class="text-bubble girlfriend">
-          <div class="contact-name">Girlfriend</div>
-          <p>It was great! Just finished some work. How about you?</p>
-        </div>
-        <div class="text-bubble user">
-          <div class="contact-name">You</div>
-          <p>Same here, just got done with class. Want to hang out soon?</p>
-        </div>
-        <div class="text-bubble girlfriend">
-          <div class="contact-name">Girlfriend</div>
-          <p>I'd love that! When are you free?</p>
-        </div>
-        <div class="text-bubble user">
-          <div class="contact-name">You</div>
-          <p>How about this weekend?</p>
-        </div>
-        <div class="text-bubble girlfriend">
-          <div class="contact-name">Girlfriend</div>
-          <p>Perfect! Can't wait 😊</p>
-        </div>
-      </div>
+    <div class="phone-screen" id="phoneScreen">
+      <!-- Messages will be appended here -->
     </div>
     <button class="next-btn" id="nextButton">Next</button>
   </div>
 
   <script>
+    const messages = [
+      { sender: 'You', text: 'Hey! How was your day?' },
+      { sender: 'Girlfriend', text: 'It was great! Just finished some work. How about you?' },
+      { sender: 'You', text: 'Same here, just got done with class. Want to hang out soon?' },
+      { sender: 'Girlfriend', text: 'I\'d love that! When are you free?' },
+      { sender: 'You', text: 'How about this weekend?' },
+      { sender: 'Girlfriend', text: 'Perfect! Can\'t wait 😊' }
+    ];
+
     let currentMessage = 0;
-    const textBubbles = document.querySelectorAll('.text-bubble');
+    const phoneScreen = document.getElementById('phoneScreen');
     const nextButton = document.getElementById('nextButton');
 
-    // Show the first message when the page loads
-    textBubbles[currentMessage].style.display = 'block';
-
-    nextButton.addEventListener('click', () => {
-      // Hide the current message
-      textBubbles[currentMessage].style.display = 'none';
+    // Function to create a new message bubble
+    function createMessageBubble(sender, text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('text-bubble');
       
-      // Move to the next message
-      currentMessage++;
-
-      if (currentMessage < textBubbles.length) {
-        // Show the next message
-        textBubbles[currentMessage].style.display = 'block';
+      // Create the contact name
+      const contactNameDiv = document.createElement('div');
+      contactNameDiv.classList.add('contact-name');
+      contactNameDiv.textContent = sender;
+      
+      // Create the text content
+      const textP = document.createElement('p');
+      textP.textContent = text;
+      
+      messageDiv.appendChild(contactNameDiv);
+      messageDiv.appendChild(textP);
+      
+      // Assign the appropriate class for user or girlfriend
+      if (sender === 'You') {
+        messageDiv.classList.add('user');
+      } else {
+        messageDiv.classList.add('girlfriend');
       }
 
-      // Disable the button if we've shown all the messages
-      if (currentMessage === textBubbles.length - 1) {
+      phoneScreen.appendChild(messageDiv);
+      messageDiv.style.display = 'block'; // Show the message
+    }
+
+    nextButton.addEventListener('click', () => {
+      if (currentMessage < messages.length) {
+        const { sender, text } = messages[currentMessage];
+        createMessageBubble(sender, text);
+        currentMessage++;
+      }
+
+      // Disable the button if all messages are shown
+      if (currentMessage === messages.length) {
         nextButton.disabled = true;
       }
     });
