@@ -177,6 +177,18 @@
       gap: 20px;
       display: none;
     }
+
+    .next-chapter-btn {
+      background-color: #90ee90;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
   </style>
 </head>
 <body>
@@ -185,6 +197,8 @@
 
   <div class="cut-title" id="cutTitle">Cut to Summer of 2023...</div>
   <div class="new-title" id="newTitle">There was a certain 'I love you' waiting to happen... Let's move forward to August 2023, a couple days after moving in.... sophomore year...</div>
+
+  <button class="next-chapter-btn" id="nextChapterButton" style="display:none;" onclick="window.location.href='chapter3.html';">Yippee! Go to Chapter 3</button>
 
   <div class="scene" id="scene">
     <div class="stick-figure" id="saanyay">
@@ -345,7 +359,7 @@
         loveResponseTitle.style.display = 'none';
         loveResponse.style.display = 'none';
         setTimeout(() => {
-          window.location.href = "chapter3.html";
+          nextChapterButton.style.display = 'block';
         }, 2000);
       } else {
         wrongAnswer.style.display = 'block';
