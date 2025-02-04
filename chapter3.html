@@ -70,6 +70,22 @@
       cursor: pointer;
       border-radius: 10px;
     }
+
+    .chapter4-btn {
+      display: none;
+      margin-top: 30px;
+      font-size: 24px;
+      background-color: #ff4081;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+
+    .chapter4-btn:hover {
+      background-color: #ff1a66;
+    }
   </style>
 </head>
 <body>
@@ -92,7 +108,7 @@
     <div class="selected-order" id="selectedOrder">Your order: </div>
     <button class="next-question" id="nextQuestion1" onclick="showSecondQuestion()">Next Question</button>
 
-    <!-- Second Question (Hidden Initially) -->
+    <!-- Second Question -->
     <div class="question" id="question2" style="display: none;">
       How many photobooth photos did we take?
     </div>
@@ -102,7 +118,21 @@
       <button class="option-btn" onclick="checkPhotoboothAnswer(8)">8</button>
       <button class="option-btn" onclick="checkPhotoboothAnswer(9)">9</button>
     </div>
-    <button class="next-question" id="nextQuestion2" style="display: none;" onclick="nextQuestion()">Next Question</button>
+    <button class="next-question" id="nextQuestion2" style="display: none;" onclick="showFinalQuestion()">Next Question</button>
+
+    <!-- Final Question -->
+    <div class="question" id="question3" style="display: none;">
+      Finally, how much do you love Saanyay?
+    </div>
+    <div class="options" id="options3" style="display: none;">
+      <button class="option-btn" onclick="checkLoveAnswer('a little')">a little</button>
+      <button class="option-btn" onclick="checkLoveAnswer('a decent amount')">a decent amount</button>
+      <button class="option-btn" onclick="checkLoveAnswer('a lot')">a lot</button>
+      <button class="option-btn" onclick="checkLoveAnswer('INFINITY TIMES A BAJILLION')">INFINITY TIMES A BAJILLION</button>
+    </div>
+
+    <!-- Chapter 4 Button -->
+    <a href="chapter4.html" class="chapter4-btn" id="chapter4Button">Go to Chapter 4!</a>
 
   </div>
 
@@ -149,9 +179,21 @@
       }
     }
 
-    function nextQuestion() {
-      alert("Correct! Moving to the next question...");
-      // Redirect or continue quiz logic here
+    function showFinalQuestion() {
+      document.getElementById("question2").style.display = "none";
+      document.getElementById("options2").style.display = "none";
+      document.getElementById("nextQuestion2").style.display = "none";
+
+      document.getElementById("question3").style.display = "block";
+      document.getElementById("options3").style.display = "flex";
+    }
+
+    function checkLoveAnswer(choice) {
+      if (choice === "INFINITY TIMES A BAJILLION") {
+        document.getElementById("chapter4Button").style.display = "block";
+      } else {
+        alert("Wrong answer! Try again.");
+      }
     }
   </script>
 
