@@ -24,11 +24,11 @@
 
     .scene {
       display: flex;
-      justify-content: space-between; /* Spread the figures apart */
-      align-items: flex-end;
+      justify-content: space-between; /* Spread figures apart */
+      align-items: center;
       position: absolute;
-      bottom: 25%;
-      width: 80%; /* Increase width for more spacing */
+      bottom: 30%; /* Moved up slightly */
+      width: 80%;
     }
 
     .stick-figure {
@@ -61,9 +61,15 @@
       margin-right: auto;
     }
 
+    .label {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
     .speech-bubble {
       position: absolute;
-      top: -80px; /* Moved higher up */
+      top: -90px; /* Moved higher */
       background-color: #fff;
       border-radius: 15px;
       padding: 15px;
@@ -74,13 +80,13 @@
     }
 
     .saanyay-bubble {
-      left: -150px; /* Move further left */
+      left: -160px; /* Move further left */
       background-color: #d1e7ff;
       text-align: left;
     }
 
     .queen-bubble {
-      right: -150px; /* Move further right */
+      right: -160px; /* Move further right */
       background-color: #ffe0e0;
       text-align: left;
     }
@@ -89,12 +95,12 @@
       background-color: #ff7f7f;
       color: #fff;
       border: none;
-      padding: 10px;
+      padding: 10px 20px;
       border-radius: 10px;
       cursor: pointer;
       font-size: 16px;
       position: absolute;
-      top: 10%; /* Move the button way higher */
+      top: 8%; /* Move the button way higher */
     }
 
   </style>
@@ -109,6 +115,7 @@
       <div class="body"></div>
       <div class="legs"></div>
       <div class="speech-bubble saanyay-bubble" id="saanyayBubble"></div>
+      <div class="label">Saanyay</div>
     </div>
 
     <div class="stick-figure" id="queen">
@@ -116,6 +123,7 @@
       <div class="body"></div>
       <div class="legs"></div>
       <div class="speech-bubble queen-bubble" id="queenBubble"></div>
+      <div class="label">Queen</div>
     </div>
   </div>
 
