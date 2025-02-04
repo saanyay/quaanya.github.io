@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 2: 1st Year Dating</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,7 +14,7 @@
 
     body {
       background-color: #f8d0d0; /* Baby pink background */
-      font-family: Arial, sans-serif;
+      font-family: 'Baloo 2', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,13 +23,13 @@
       position: relative;
     }
 
-    .title {
+    .date-text {
       position: absolute;
-      top: 10%;
-      right: 10%;
+      top: 14%; /* Positioned under Next button */
       font-size: 30px;
       font-weight: bold;
-      color: black;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
       opacity: 1;
       transition: opacity 0.5s ease;
     }
@@ -38,7 +39,7 @@
       justify-content: space-between; /* Spread figures apart */
       align-items: center;
       position: absolute;
-      bottom: 35%; /* Positioned slightly higher */
+      bottom: 35%;
       width: 90%;
       display: none; /* Hidden initially */
     }
@@ -83,25 +84,25 @@
 
     .speech-bubble {
       position: absolute;
-      top: -120px; /* Raised both bubbles */
+      top: -120px;
       background-color: #fff;
       border-radius: 15px;
       padding: 15px;
       font-size: 20px;
-      width: 700px; /* Increased width for more horizontal space */
+      width: 700px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       white-space: pre-wrap;
-      display: none; /* Initially hidden */
+      display: none;
     }
 
     .saanyay-bubble {
-      left: 120px; /* Moved further right */
+      left: 120px;
       background-color: #d1e7ff;
       text-align: left;
     }
 
     .queen-bubble {
-      right: 120px; /* Moved further left */
+      right: 120px;
       background-color: #ffe0e0;
       text-align: left;
     }
@@ -115,16 +116,15 @@
       cursor: pointer;
       font-size: 16px;
       position: absolute;
-      top: 8%; /* Move the button way higher */
+      top: 8%;
     }
 
   </style>
 </head>
 <body>
 
-  <div class="title" id="title">Feb 2023...</div>
-
   <button class="next-btn" id="nextButton">Next</button>
+  <div class="date-text" id="dateText">Around Feb 2023...</div>
 
   <div class="scene" id="scene">
     <div class="stick-figure" id="saanyay">
@@ -155,7 +155,7 @@
     let currentMessage = 0;
     let titleShown = true;
 
-    const title = document.getElementById('title');
+    const dateText = document.getElementById('dateText');
     const scene = document.getElementById('scene');
     const saanyayBubble = document.getElementById('saanyayBubble');
     const queenBubble = document.getElementById('queenBubble');
@@ -163,9 +163,9 @@
 
     function showNextMessage() {
       if (titleShown) {
-        title.style.opacity = "0"; // Fade out title
+        dateText.style.opacity = "0"; // Fade out title
         setTimeout(() => {
-          title.style.display = "none";
+          dateText.style.display = "none";
           scene.style.display = "flex"; // Show the scene
         }, 500);
         titleShown = false;
