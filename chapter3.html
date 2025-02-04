@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +18,13 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+    }
+
+    .title {
+      font-size: 24px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      margin-bottom: 20px;
     }
 
     .question {
@@ -69,13 +75,17 @@
 <body>
 
   <div class="quiz-container">
+    <div class="title">
+      Our 2nd Year of Dating, we experienced a lot of new things...  
+      Let's recap some:
+    </div>
     <div class="question">
       What's the order of concerts we went to?
     </div>
     <div class="options">
-      <button class="option-btn" onclick="selectOption('Mitski')">Mitski</button>
-      <button class="option-btn" onclick="selectOption('Childish Gambino')">Childish Gambino</button>
       <button class="option-btn" onclick="selectOption('Itsmurph')">Itsmurph</button>
+      <button class="option-btn" onclick="selectOption('Childish Gambino')">Childish Gambino</button>
+      <button class="option-btn" onclick="selectOption('Mitski')">Mitski</button>
     </div>
     <div class="selected-order" id="selectedOrder">Your order: </div>
     <button class="next-question" id="nextQuestion" onclick="nextQuestion()">Next Question</button>
