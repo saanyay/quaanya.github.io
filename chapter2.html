@@ -13,7 +13,7 @@
     }
 
     body {
-      background-color: #f8d0d0; /* Baby pink background */
+      background-color: #f8d0d0;
       font-family: 'Baloo 2', sans-serif;
       display: flex;
       justify-content: center;
@@ -119,9 +119,10 @@
       top: 8%;
     }
 
-    .response-title {
+    /* Response Sections */
+    .response-title, .love-response-title {
       position: absolute;
-      top: -2000px;
+      top: 60%;
       font-size: 35px;
       font-weight: bold;
       color: white;
@@ -129,19 +130,9 @@
       display: none;
     }
 
-    .response-subtitle {
+    .response-buttons, .love-response {
       position: absolute;
-      top: 50%;
-      font-size: 28px;
-      font-weight: bold;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-      display: none;
-    }
-
-    .response-buttons {
-      position: absolute;
-      top: 60%;
+      top: 70%;
       display: flex;
       gap: 20px;
       display: none;
@@ -159,7 +150,7 @@
 
     .wrong-answer {
       position: absolute;
-      top: 70%;
+      top: 75%;
       font-size: 28px;
       font-weight: bold;
       color: white;
@@ -167,7 +158,8 @@
       display: none;
     }
 
-    .cut-title {
+    /* Transition Titles */
+    .cut-title, .new-title {
       position: absolute;
       top: 14%;
       font-size: 30px;
@@ -178,14 +170,21 @@
       transition: opacity 0.5s ease;
     }
 
+    .response-options {
+      position: absolute;
+      top: 70%;
+      display: flex;
+      gap: 20px;
+      display: none;
+    }
   </style>
 </head>
 <body>
-
   <button class="next-btn" id="nextButton">Next</button>
   <div class="date-text" id="dateText">Around Feb 2023...</div>
 
   <div class="cut-title" id="cutTitle">Cut to Summer of 2023...</div>
+  <div class="new-title" id="newTitle">There was a certain 'I love you' waiting to happen... Let's move forward to August 2023, a couple days after moving in.... sophomore year...</div>
 
   <div class="scene" id="scene">
     <div class="stick-figure" id="saanyay">
@@ -205,13 +204,25 @@
     </div>
   </div>
 
+  <!-- Response Sections -->
   <div class="response-title" id="responseTitle">What will you respond?</div>
-  <div class="response-subtitle" id="responseSubtitle">What is your solution?</div>
   <div class="response-buttons" id="responseButtons">
-    <button class="response-btn" onclick="chooseResponse('facetime')">Let's facetime</button>
-    <button class="response-btn" onclick="chooseResponse('eastmeadow')">Come to East Meadow and meet my friends</button>
-    <button class="response-btn" onclick="chooseResponse('dontneed')">I don't need to see you</button>
-    <button class="response-btn" onclick="chooseResponse('idk')">idk man....</button>
+    <button class="response-btn" onclick="chooseResponse('yes')">Yes of course Saanyay</button>
+    <button class="response-btn" onclick="chooseResponse('no')">No...soz</button>
+  </div>
+
+  <div class="response-options" id="responseOptions">
+    <button class="response-btn" onclick="chooseSolution('facetime')">Let's Facetime</button>
+    <button class="response-btn" onclick="chooseSolution('eastmeadow')">Come to East Meadow and meet my friends</button>
+    <button class="response-btn" onclick="chooseSolution('dontneed')">I don't need to see you</button>
+    <button class="response-btn" onclick="chooseSolution('idk')">Idk man....</button>
+  </div>
+
+  <!-- Love Confession Response -->
+  <div class="love-response-title" id="loveResponseTitle">What will you say?</div>
+  <div class="love-response" id="loveResponse">
+    <button class="response-btn" onclick="chooseLoveResponse('yes')">I love you too!</button>
+    <button class="response-btn" onclick="chooseLoveResponse('no')">I need more time.</button>
   </div>
 
   <div class="wrong-answer" id="wrongAnswer">WRONG ANSWER TRY AGAIN</div>
@@ -220,17 +231,22 @@
     let currentMessage = 0;
     let titleShown = true;
     let responseGiven = false;
+    let solutionGiven = false;
 
+    // DOM Elements
     const dateText = document.getElementById('dateText');
     const cutTitle = document.getElementById('cutTitle');
+    const newTitle = document.getElementById('newTitle');
     const scene = document.getElementById('scene');
     const saanyayBubble = document.getElementById('saanyayBubble');
     const queenBubble = document.getElementById('queenBubble');
     const nextButton = document.getElementById('nextButton');
     const responseTitle = document.getElementById('responseTitle');
-    const responseSubtitle = document.getElementById('responseSubtitle');
     const responseButtons = document.getElementById('responseButtons');
     const wrongAnswer = document.getElementById('wrongAnswer');
+    const responseOptions = document.getElementById('responseOptions');
+    const loveResponseTitle = document.getElementById('loveResponseTitle');
+    const loveResponse = document.getElementById('loveResponse');
 
     function showNextMessage() {
       if (titleShown) {
@@ -248,7 +264,6 @@
         saanyayBubble.style.display = 'block';
         setTimeout(() => {
           responseTitle.style.display = 'block';
-          responseSubtitle.style.display = 'block';
           responseButtons.style.display = 'flex';
         }, 1000);
         currentMessage++;
@@ -259,58 +274,88 @@
         setTimeout(() => {
           cutTitle.style.opacity = '0';
           saanyayBubble.style.display = 'none';
-          queenBubble.style.display = 'none'; // Hide the bubbles until the user clicks next
+          queenBubble.style.display = 'none';
           saanyayBubble.textContent = "I miss you, how can I see you as soon as possible?";
           saanyayBubble.style.display = 'block';
+          responseOptions.style.display = 'flex';
         }, 1000);
+      }
+
+      if (solutionGiven) {
+        newTitle.style.opacity = '1';
+        setTimeout(() => {
+          newTitle.style.opacity = '0';
+          saanyayBubble.style.display = 'none';
+          queenBubble.style.display = 'none';
+          saanyayBubble.textContent = "Queen... I have to tell you something... I love you....";
+          saanyayBubble.style.display = 'block';
+          responseOptions.style.display = 'none';
+          setTimeout(() => {
+            loveResponseTitle.style.display = 'block';
+            loveResponse.style.display = 'flex';
+          }, 2000);
+        }, 2000);
       }
     }
 
+    // Response Handlers
     function chooseResponse(response) {
       responseTitle.style.display = 'none';
-      responseSubtitle.style.display = 'none';
       responseButtons.style.display = 'none';
 
-      if (response === 'facetime') {
-        queenBubble.textContent = "not good enough... try remembering what happened";
-        queenBubble.style.display = 'block';
-        wrongAnswer.style.display = 'block';
-        setTimeout(() => {
-          wrongAnswer.style.display = 'none';
-          responseTitle.style.display = 'block';
-          responseSubtitle.style.display = 'block';
-          responseButtons.style.display = 'flex';
-        }, 1500);
-      } else if (response === 'dontneed') {
-        queenBubble.textContent = "try to remember history... try again";
-        queenBubble.style.display = 'block';
-        wrongAnswer.style.display = 'block';
-        setTimeout(() => {
-          wrongAnswer.style.display = 'none';
-          responseTitle.style.display = 'block';
-          responseSubtitle.style.display = 'block';
-          responseButtons.style.display = 'flex';
-        }, 1500);
-      } else if (response === 'idk') {
-        queenBubble.textContent = "THEN FIGURE IT OUT!!! pick again";
-        queenBubble.style.display = 'block';
-        wrongAnswer.style.display = 'block';
-        setTimeout(() => {
-          wrongAnswer.style.display = 'none';
-          responseTitle.style.display = 'block';
-          responseSubtitle.style.display = 'block';
-          responseButtons.style.display = 'flex';
-        }, 1500);
-      } else if (response === 'eastmeadow') {
-        queenBubble.textContent = "East Meadow is perfect!";
+      if (response === 'yes') {
+        queenBubble.textContent = "Yes of course!";
         queenBubble.style.display = 'block';
         responseGiven = true;
-        showNextMessage();
+      } else {
+        wrongAnswer.style.display = 'block';
+        setTimeout(() => {
+          wrongAnswer.style.display = 'none';
+          responseButtons.style.display = 'flex';
+        }, 2000);
+      }
+    }
+
+    function chooseSolution(solution) {
+      if (solution === 'eastmeadow') {
+        responseOptions.style.display = 'none';
+        queenBubble.textContent = "Come to East Meadow and meet my friends";
+        queenBubble.style.display = 'block';
+        setTimeout(() => {
+          saanyayBubble.textContent = "Bet";
+          responseGiven = false
+          responseOptions.style.display = 'none';
+          cutTitle.style.opacity = '0';
+          saanyayBubble.style.display = 'block';
+          solutionGiven = true;
+          setTimeout(() => showNextMessage(), 1000);
+        }, 2000);
+      } else {
+        wrongAnswer.style.display = 'block';
+        setTimeout(() => {
+          wrongAnswer.style.display = 'none';
+        }, 2000);
+      }
+    }
+
+    function chooseLoveResponse(response) {
+      if (response === 'yes') {
+        queenBubble.textContent = "I love you too!";
+        queenBubble.style.display = 'block';
+        loveResponseTitle.style.display = 'none';
+        loveResponse.style.display = 'none';
+        setTimeout(() => {
+          window.location.href = "chapter3.html";
+        }, 2000);
+      } else {
+        wrongAnswer.style.display = 'block';
+        setTimeout(() => {
+          wrongAnswer.style.display = 'none';
+        }, 2000);
       }
     }
 
     nextButton.addEventListener('click', showNextMessage);
   </script>
-
 </body>
 </html>
