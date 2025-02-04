@@ -6,7 +6,6 @@
   <title>Chapter 4: Will You Be My Valentine?</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
   <style>
-    /* Reuse your Chapter 2 styles + add new ones below */
     body {
       background-color: #FFC0CB; /* Baby pink background */
       font-family: 'Baloo 2', sans-serif;
@@ -68,9 +67,28 @@
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
     }
 
+    .yay-text {
+      font-size: 80px;
+      color: white;
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      animation: popUp 1s ease-in-out;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    @keyframes popUp {
+      0% { transform: scale(0) translate(-50%, -50%); opacity: 0; }
+      50% { transform: scale(1.2) translate(-50%, -50%); opacity: 1; }
+      100% { transform: scale(1) translate(-50%, -50%); opacity: 1; }
     }
   </style>
 </head>
@@ -96,8 +114,16 @@
     </div>
   </div>
 
+  <!-- Yay text -->
+  <div class="yay-text" id="yayText">Yay!</div>
+
   <!-- Confetti canvas -->
   <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1000;"></canvas>
+
+  <!-- Audio -->
+  <audio id="backgroundMusic" loop>
+    <source src="https://drive.google.com/uc?export=download&id=1t1KPgtQbYJHOgcUQkbagqViYx_hKF5ax" type="audio/mpeg">
+  </audio>
 
   <!-- Include canvas-confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
@@ -106,8 +132,11 @@
     let currentStep = 1;
     const texts = document.querySelectorAll('.proposal-text');
 
-    // Animate text step-by-step
+    // Animate text step-by-step and play music on first step
     function animateProposal() {
+      if (currentStep === 1) {
+        document.getElementById("backgroundMusic").play(); // Start music
+      }
       if (currentStep <= texts.length) {
         texts[currentStep - 1].style.display = 'block';
         setTimeout(() => {
@@ -119,13 +148,22 @@
       }
     }
 
-    // Confetti effect when "Yes" is clicked
+    // Confetti and "Yay!" effect when "Yes" is clicked
     document.getElementById('yesButton').addEventListener('click', () => {
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 }
       });
+
+      // Show "Yay!" text
+      const yayText = document.getElementById("yayText");
+      yayText.style.display = "block";
+
+      // Hide "Yay!" text after 2 seconds
+      setTimeout(() => {
+        yayText.style.display = "none";
+      }, 2000);
     });
 
     // Move the "No" button to a random spot when clicked
