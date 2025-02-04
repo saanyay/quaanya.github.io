@@ -256,6 +256,8 @@
         cutTitle.style.opacity = '1';
         setTimeout(() => {
           cutTitle.style.opacity = '0';
+          saanyayBubble.style.display = 'none';
+          queenBubble.style.display = 'none'; // Hide the bubbles until the user clicks next
           saanyayBubble.textContent = "I miss you, how can I see you as soon as possible?";
           saanyayBubble.style.display = 'block';
         }, 1000);
