@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4: Will You Be My Valentine?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* Reuse your Chapter 2 styles + add new ones below */
+    body {
+      background: linear-gradient(to bottom, #2c3e50, #3498db); /* Night sky */
+      font-family: 'Baloo 2', sans-serif;
+    }
 
+    .proposal-scene {
+      background: url('https://img.freepik.com/free-vector/starry-night-sky-watercolor_23-2148907301.jpg'); 
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .proposal-text {
+      font-size: 35px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      margin: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+
+    .final-question {
+      font-size: 50px;
+      color: #ff7f7f;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      margin-top: 30px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .final-question:hover {
+      transform: scale(1.1);
+    }
+
+    .hidden-ring {
+      width: 150px;
+      height: 150px;
+      opacity: 0;
+      transition: opacity 1s;
+      position: absolute;
+      bottom: 20%;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="proposal-scene">
+    <div class="proposal-text" id="text1">
+      Queen, every chapter with you feels like magic... 🌟
+    </div>
+    <div class="proposal-text" id="text2" style="display: none;">
+      From our first "I love you" to building a life together...
+    </div>
+    <div class="proposal-text" id="text3" style="display: none;">
+      You’ve been my partner, my joy, and my favorite adventure.
+    </div>
+    <div class="proposal-text" id="text4" style="display: none;">
+      Now, I have one more question to ask...
+    </div>
+
+    <div id="proposal" style="display: none;">
+      <img src="https://cdn-icons-png.flaticon.com/512/1067/1067555.png" class="hidden-ring" id="ring">
+      <div class="final-question" onclick="revealRing()">
+        🌹 Will you be my Valentine? 🌹
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const texts = document.querySelectorAll('.proposal-text');
+
+    // Animate text step-by-step
+    function animateProposal() {
+      if (currentStep <= texts.length) {
+        texts[currentStep - 1].style.display = 'block';
+        setTimeout(() => {
+          currentStep++;
+          animateProposal();
+        }, 3000);
+      } else {
+        document.getElementById('proposal').style.display = 'block';
+      }
+    }
+
+    // Final interaction
+    function revealRing() {
+      document.getElementById('ring').style.opacity = '1';
+      setTimeout(() => {
+        alert("SHE SAID YES! ❤️ (P.S. Check your real-life doorstep for a surprise!)");
+      }, 1000);
+    }
+
+    // Start animation when page loads
+    window.onload = animateProposal;
+  </script>
+</body>
+</html>
