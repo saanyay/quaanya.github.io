@@ -27,7 +27,7 @@
       justify-content: space-between; /* Spread figures apart */
       align-items: center;
       position: absolute;
-      bottom: 30%; /* Moved up slightly */
+      bottom: 35%; /* Moved up slightly */
       width: 80%;
     }
 
@@ -62,31 +62,35 @@
     }
 
     .label {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: bold;
-      margin-top: 5px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 5px 15px;
+      border-radius: 15px;
+      display: inline-block;
+      margin-top: 10px;
     }
 
     .speech-bubble {
       position: absolute;
-      top: -90px; /* Moved higher */
+      top: -100px; /* Raised both bubbles */
       background-color: #fff;
       border-radius: 15px;
       padding: 15px;
       font-size: 18px;
-      max-width: 350px; /* Wider bubbles */
+      max-width: 350px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       white-space: pre-wrap;
     }
 
     .saanyay-bubble {
-      left: -160px; /* Move further left */
+      left: 50px; /* Positioned to the right */
       background-color: #d1e7ff;
       text-align: left;
     }
 
     .queen-bubble {
-      right: -160px; /* Move further right */
+      right: 50px; /* Positioned to the left */
       background-color: #ffe0e0;
       text-align: left;
     }
@@ -100,7 +104,7 @@
       cursor: pointer;
       font-size: 16px;
       position: absolute;
-      top: 8%; /* Move the button way higher */
+      top: 10%; /* Move the button way higher */
     }
 
   </style>
