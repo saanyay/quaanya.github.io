@@ -157,6 +157,16 @@
       font-size: 18px;
     }
 
+    .wrong-answer {
+      position: absolute;
+      top: 70%;
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      display: none;
+    }
+
   </style>
 </head>
 <body>
@@ -189,6 +199,8 @@
     <button class="response-btn" onclick="chooseResponse('no')">No...soz</button>
   </div>
 
+  <div class="wrong-answer" id="wrongAnswer">WRONG ANSWER TRY AGAIN</div>
+
   <script>
     let currentMessage = 0;
     let titleShown = true;
@@ -201,6 +213,7 @@
     const responseTitle = document.getElementById('responseTitle');
     const responseSubtitle = document.getElementById('responseSubtitle');
     const responseButtons = document.getElementById('responseButtons');
+    const wrongAnswer = document.getElementById('wrongAnswer');
 
     function showNextMessage() {
       if (titleShown) {
@@ -232,10 +245,16 @@
 
       if (response === 'yes') {
         queenBubble.textContent = "Yes of course!";
+        queenBubble.style.display = 'block';
       } else {
-        queenBubble.textContent = "No...soz";
+        wrongAnswer.style.display = 'block';
+        setTimeout(() => {
+          wrongAnswer.style.display = 'none';
+          responseTitle.style.display = 'block';
+          responseSubtitle.style.display = 'block';
+          responseButtons.style.display = 'flex';
+        }, 2000);
       }
-      queenBubble.style.display = 'block';
     }
 
     nextButton.addEventListener('click', showNextMessage);
