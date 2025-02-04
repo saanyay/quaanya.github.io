@@ -206,10 +206,12 @@
   </div>
 
   <div class="response-title" id="responseTitle">What will you respond?</div>
-  <div class="response-subtitle" id="responseSubtitle">What is your response?</div>
+  <div class="response-subtitle" id="responseSubtitle">What is your solution?</div>
   <div class="response-buttons" id="responseButtons">
-    <button class="response-btn" onclick="chooseResponse('yes')">Yes of course Saanyay</button>
-    <button class="response-btn" onclick="chooseResponse('no')">No...soz</button>
+    <button class="response-btn" onclick="chooseResponse('facetime')">Let's facetime</button>
+    <button class="response-btn" onclick="chooseResponse('eastmeadow')">Come to East Meadow and meet my friends</button>
+    <button class="response-btn" onclick="chooseResponse('dontneed')">I don't need to see you</button>
+    <button class="response-btn" onclick="chooseResponse('idk')">idk man....</button>
   </div>
 
   <div class="wrong-answer" id="wrongAnswer">WRONG ANSWER TRY AGAIN</div>
@@ -269,18 +271,40 @@
       responseSubtitle.style.display = 'none';
       responseButtons.style.display = 'none';
 
-      if (response === 'yes') {
-        queenBubble.textContent = "Yes of course!";
+      if (response === 'facetime') {
+        queenBubble.textContent = "not good enough... try remembering what happened";
         queenBubble.style.display = 'block';
-        responseGiven = true;
-      } else {
         wrongAnswer.style.display = 'block';
         setTimeout(() => {
           wrongAnswer.style.display = 'none';
           responseTitle.style.display = 'block';
           responseSubtitle.style.display = 'block';
           responseButtons.style.display = 'flex';
-        }, 2000);
+        }, 1500);
+      } else if (response === 'eastmeadow') {
+        queenBubble.textContent = "Come to East Meadow and meet my friends!";
+        queenBubble.style.display = 'block';
+        responseGiven = true;
+      } else if (response === 'dontneed') {
+        queenBubble.textContent = "try to remember history... try again";
+        queenBubble.style.display = 'block';
+        wrongAnswer.style.display = 'block';
+        setTimeout(() => {
+          wrongAnswer.style.display = 'none';
+          responseTitle.style.display = 'block';
+          responseSubtitle.style.display = 'block';
+          responseButtons.style.display = 'flex';
+        }, 1500);
+      } else if (response === 'idk') {
+        queenBubble.textContent = "THEN FIGURE IT OUT!!! pick again";
+        queenBubble.style.display = 'block';
+        wrongAnswer.style.display = 'block';
+        setTimeout(() => {
+          wrongAnswer.style.display = 'none';
+          responseTitle.style.display = 'block';
+          responseSubtitle.style.display = 'block';
+          responseButtons.style.display = 'flex';
+        }, 1500);
       }
     }
 
