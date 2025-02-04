@@ -167,12 +167,25 @@
       display: none;
     }
 
+    .cut-title {
+      position: absolute;
+      top: 14%;
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
   </style>
 </head>
 <body>
 
   <button class="next-btn" id="nextButton">Next</button>
   <div class="date-text" id="dateText">Around Feb 2023...</div>
+
+  <div class="cut-title" id="cutTitle">Cut to Summer of 2023...</div>
 
   <div class="scene" id="scene">
     <div class="stick-figure" id="saanyay">
@@ -204,8 +217,10 @@
   <script>
     let currentMessage = 0;
     let titleShown = true;
+    let responseGiven = false;
 
     const dateText = document.getElementById('dateText');
+    const cutTitle = document.getElementById('cutTitle');
     const scene = document.getElementById('scene');
     const saanyayBubble = document.getElementById('saanyayBubble');
     const queenBubble = document.getElementById('queenBubble');
@@ -236,6 +251,15 @@
         }, 1000);
         currentMessage++;
       }
+
+      if (responseGiven) {
+        cutTitle.style.opacity = '1';
+        setTimeout(() => {
+          cutTitle.style.opacity = '0';
+          saanyayBubble.textContent = "I miss you, how can I see you as soon as possible?";
+          saanyayBubble.style.display = 'block';
+        }, 1000);
+      }
     }
 
     function chooseResponse(response) {
@@ -246,6 +270,7 @@
       if (response === 'yes') {
         queenBubble.textContent = "Yes of course!";
         queenBubble.style.display = 'block';
+        responseGiven = true;
       } else {
         wrongAnswer.style.display = 'block';
         setTimeout(() => {
