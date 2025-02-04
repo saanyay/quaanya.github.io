@@ -50,13 +50,13 @@
       display: none; /* Initially hide all messages */
     }
 
-    .user {
+    .saanyay {
       background-color: #d1e7ff;
       align-self: flex-end;
       text-align: right;
     }
 
-    .girlfriend {
+    .queen {
       background-color: #ffe0e0;
       align-self: flex-start;
       text-align: left;
@@ -97,12 +97,12 @@
 
   <script>
     const messages = [
-      { sender: 'You', text: 'Hey! How was your day?' },
-      { sender: 'Girlfriend', text: 'It was great! Just finished some work. How about you?' },
-      { sender: 'You', text: 'Same here, just got done with class. Want to hang out soon?' },
-      { sender: 'Girlfriend', text: 'I\'d love that! When are you free?' },
-      { sender: 'You', text: 'How about this weekend?' },
-      { sender: 'Girlfriend', text: 'Perfect! Can\'t wait 😊' }
+      { sender: 'Saanyay', text: 'Hey! How was your day?' },
+      { sender: 'Queen', text: 'It was great! Just finished some work. How about you?' },
+      { sender: 'Saanyay', text: 'Same here, just got done with class. Want to hang out soon?' },
+      { sender: 'Queen', text: 'I\'d love that! When are you free?' },
+      { sender: 'Saanyay', text: 'How about this weekend?' },
+      { sender: 'Queen', text: 'Perfect! Can\'t wait 😊' }
     ];
 
     let currentMessage = 0;
@@ -126,11 +126,11 @@
       messageDiv.appendChild(contactNameDiv);
       messageDiv.appendChild(textP);
       
-      // Assign the appropriate class for user or girlfriend
-      if (sender === 'You') {
-        messageDiv.classList.add('user');
+      // Assign the appropriate class for Saanyay or Queen
+      if (sender === 'Saanyay') {
+        messageDiv.classList.add('saanyay');
       } else {
-        messageDiv.classList.add('girlfriend');
+        messageDiv.classList.add('queen');
       }
 
       phoneScreen.appendChild(messageDiv);
