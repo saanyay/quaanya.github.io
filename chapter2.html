@@ -27,7 +27,7 @@
       justify-content: space-evenly;
       align-items: flex-end;
       position: absolute;
-      bottom: 20%;
+      bottom: 25%; /* Adjusted to give more space for the button */
       width: 100%;
     }
 
@@ -53,8 +53,12 @@
     }
 
     .stick-figure .legs {
-      font-size: 20px;
+      width: 10px; /* Increased thickness */
+      height: 20px;
+      background-color: #000;
       margin-top: 5px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .speech-bubble {
@@ -89,6 +93,8 @@
       cursor: pointer;
       font-size: 16px;
       margin-top: 20px;
+      position: relative;
+      bottom: 20px; /* Moves the button up */
     }
 
   </style>
@@ -99,14 +105,14 @@
     <div class="stick-figure" id="saanyay">
       <div class="head"></div>
       <div class="body"></div>
-      <div class="legs">/\</div>
+      <div class="legs"></div>
       <div class="speech-bubble saanyay-bubble" id="saanyayBubble"></div>
     </div>
 
     <div class="stick-figure" id="queen">
       <div class="head"></div>
       <div class="body"></div>
-      <div class="legs">/\</div>
+      <div class="legs"></div>
       <div class="speech-bubble queen-bubble" id="queenBubble"></div>
     </div>
   </div>
