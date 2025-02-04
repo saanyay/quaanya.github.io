@@ -22,6 +22,17 @@
       position: relative;
     }
 
+    .title {
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      font-size: 30px;
+      font-weight: bold;
+      color: black;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
     .scene {
       display: flex;
       justify-content: space-between; /* Spread figures apart */
@@ -29,6 +40,7 @@
       position: absolute;
       bottom: 35%; /* Positioned slightly higher */
       width: 90%;
+      display: none; /* Hidden initially */
     }
 
     .stick-figure {
@@ -79,6 +91,7 @@
       width: 700px; /* Increased width for more horizontal space */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       white-space: pre-wrap;
+      display: none; /* Initially hidden */
     }
 
     .saanyay-bubble {
@@ -109,9 +122,11 @@
 </head>
 <body>
 
+  <div class="title" id="title">Feb 2023...</div>
+
   <button class="next-btn" id="nextButton">Next</button>
 
-  <div class="scene">
+  <div class="scene" id="scene">
     <div class="stick-figure" id="saanyay">
       <div class="head"></div>
       <div class="body"></div>
@@ -138,12 +153,25 @@
     ];
 
     let currentMessage = 0;
+    let titleShown = true;
 
+    const title = document.getElementById('title');
+    const scene = document.getElementById('scene');
     const saanyayBubble = document.getElementById('saanyayBubble');
     const queenBubble = document.getElementById('queenBubble');
     const nextButton = document.getElementById('nextButton');
 
     function showNextMessage() {
+      if (titleShown) {
+        title.style.opacity = "0"; // Fade out title
+        setTimeout(() => {
+          title.style.display = "none";
+          scene.style.display = "flex"; // Show the scene
+        }, 500);
+        titleShown = false;
+        return;
+      }
+
       if (currentMessage < conversation.length) {
         const { sender, text } = conversation[currentMessage];
 
@@ -165,7 +193,6 @@
 
     nextButton.addEventListener('click', showNextMessage);
 
-    showNextMessage();
   </script>
 
 </body>
