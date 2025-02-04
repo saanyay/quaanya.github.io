@@ -1,1 +1,116 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: Quiz Time!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #FFC0CB;
+      font-family: 'Baloo 2', sans-serif;
+      text-align: center;
+    }
+
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .question {
+      font-size: 28px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      gap: 15px;
+    }
+
+    .option-btn {
+      font-size: 20px;
+      padding: 10px 20px;
+      background-color: #ff7f7f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.2s;
+    }
+
+    .option-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .selected-order {
+      margin-top: 20px;
+      font-size: 20px;
+      color: white;
+    }
+
+    .next-question {
+      display: none;
+      margin-top: 20px;
+      font-size: 22px;
+      background-color: #ffcccb;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <div class="question">
+      What's the order of concerts we went to?
+    </div>
+    <div class="options">
+      <button class="option-btn" onclick="selectOption('Mitski')">Mitski</button>
+      <button class="option-btn" onclick="selectOption('Childish Gambino')">Childish Gambino</button>
+      <button class="option-btn" onclick="selectOption('Itsmurph')">Itsmurph</button>
+    </div>
+    <div class="selected-order" id="selectedOrder">Your order: </div>
+    <button class="next-question" id="nextQuestion" onclick="nextQuestion()">Next Question</button>
+  </div>
+
+  <script>
+    const correctOrder = ["Mitski", "Childish Gambino", "Itsmurph"];
+    let userOrder = [];
+
+    function selectOption(choice) {
+      if (userOrder.length < 3) {
+        userOrder.push(choice);
+        document.getElementById("selectedOrder").textContent = "Your order: " + userOrder.join(" ➝ ");
+
+        if (userOrder.length === 3) {
+          checkOrder();
+        }
+      }
+    }
+
+    function checkOrder() {
+      if (JSON.stringify(userOrder) === JSON.stringify(correctOrder)) {
+        document.getElementById("nextQuestion").style.display = "block";
+      } else {
+        alert("Oops! Try again.");
+        userOrder = [];
+        document.getElementById("selectedOrder").textContent = "Your order: ";
+      }
+    }
+
+    function nextQuestion() {
+      alert("Correct! Moving to the next question...");
+      // Redirect to next question or continue quiz logic here
+    }
+  </script>
+
+</body>
+</html>
