@@ -45,6 +45,7 @@
       margin: 5px 0;
       border-radius: 15px;
       font-size: 16px;
+      display: none; /* Initially hide all messages */
     }
 
     .user {
@@ -58,30 +59,104 @@
       align-self: flex-start;
       text-align: left;
     }
+
+    .contact-name {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: left;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .next-btn {
+      background-color: #ff7f7f;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .next-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .message-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .user .contact-name,
+    .girlfriend .contact-name {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #888;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="phone-screen">
-      <div class="text-bubble user">
-        <p>Hey! How was your day?</p>
-      </div>
-      <div class="text-bubble girlfriend">
-        <p>It was great! Just finished some work. How about you?</p>
-      </div>
-      <div class="text-bubble user">
-        <p>Same here, just got done with class. Want to hang out soon?</p>
-      </div>
-      <div class="text-bubble girlfriend">
-        <p>I'd love that! When are you free?</p>
-      </div>
-      <div class="text-bubble user">
-        <p>How about this weekend?</p>
-      </div>
-      <div class="text-bubble girlfriend">
-        <p>Perfect! Can't wait 😊</p>
+      <div class="message-container">
+        <div class="text-bubble user">
+          <div class="contact-name">You</div>
+          <p>Hey! How was your day?</p>
+        </div>
+        <div class="text-bubble girlfriend">
+          <div class="contact-name">Girlfriend</div>
+          <p>It was great! Just finished some work. How about you?</p>
+        </div>
+        <div class="text-bubble user">
+          <div class="contact-name">You</div>
+          <p>Same here, just got done with class. Want to hang out soon?</p>
+        </div>
+        <div class="text-bubble girlfriend">
+          <div class="contact-name">Girlfriend</div>
+          <p>I'd love that! When are you free?</p>
+        </div>
+        <div class="text-bubble user">
+          <div class="contact-name">You</div>
+          <p>How about this weekend?</p>
+        </div>
+        <div class="text-bubble girlfriend">
+          <div class="contact-name">Girlfriend</div>
+          <p>Perfect! Can't wait 😊</p>
+        </div>
       </div>
     </div>
+    <button class="next-btn" id="nextButton">Next</button>
   </div>
+
+  <script>
+    let currentMessage = 0;
+    const textBubbles = document.querySelectorAll('.text-bubble');
+    const nextButton = document.getElementById('nextButton');
+
+    // Show the first message when the page loads
+    textBubbles[currentMessage].style.display = 'block';
+
+    nextButton.addEventListener('click', () => {
+      // Hide the current message
+      textBubbles[currentMessage].style.display = 'none';
+      
+      // Move to the next message
+      currentMessage++;
+
+      if (currentMessage < textBubbles.length) {
+        // Show the next message
+        textBubbles[currentMessage].style.display = 'block';
+      }
+
+      // Disable the button if we've shown all the messages
+      if (currentMessage === textBubbles.length - 1) {
+        nextButton.disabled = true;
+      }
+    });
+  </script>
 </body>
 </html>
