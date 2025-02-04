@@ -281,10 +281,6 @@
           responseSubtitle.style.display = 'block';
           responseButtons.style.display = 'flex';
         }, 1500);
-      } else if (response === 'eastmeadow') {
-        queenBubble.textContent = "Come to East Meadow and meet my friends!";
-        queenBubble.style.display = 'block';
-        responseGiven = true;
       } else if (response === 'dontneed') {
         queenBubble.textContent = "try to remember history... try again";
         queenBubble.style.display = 'block';
@@ -305,6 +301,11 @@
           responseSubtitle.style.display = 'block';
           responseButtons.style.display = 'flex';
         }, 1500);
+      } else if (response === 'eastmeadow') {
+        queenBubble.textContent = "East Meadow is perfect!";
+        queenBubble.style.display = 'block';
+        responseGiven = true;
+        showNextMessage();
       }
     }
 
