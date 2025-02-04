@@ -181,7 +181,9 @@
       // If we've finished all the messages in the current conversation
       if (currentMessage === currentConversation.length) {
         nextButton.style.display = 'none';
-        reloadButton.style.display = 'none'; // Hide the "Start New Conversation" button
+        if (currentConversation === firstConversation) {
+          reloadButton.style.display = 'block'; // Show "Start New Conversation" button after the first conversation
+        }
         if (currentConversation === secondConversation) {
           nextChapterButton.style.display = 'block'; // Show the "Go to Chapter 2" button after the second conversation
         }
