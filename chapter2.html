@@ -66,10 +66,11 @@
       top: -70px; /* Moved higher up */
       background-color: #fff;
       border-radius: 15px;
-      padding: 15px; /* Increased padding for wider bubbles */
+      padding: 15px;
       font-size: 18px;
-      max-width: 250px; /* Wider bubbles */
+      max-width: 300px; /* Made the text bubble wider */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      white-space: pre-wrap; /* To allow for multiline text */
     }
 
     .saanyay-bubble {
@@ -92,8 +93,8 @@
       border-radius: 10px;
       cursor: pointer;
       font-size: 16px;
-      position: relative;
-      bottom: 50px; /* Moved the button closer to the top */
+      position: absolute;
+      top: 15%; /* Moved the button much higher */
     }
 
   </style>
