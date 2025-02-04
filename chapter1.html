@@ -108,7 +108,7 @@
   </div>
 
   <script>
-    const messages = [
+    const firstConversation = [
       { sender: 'Saanyay', text: 'Hey! How was your day?' },
       { sender: 'Queen', text: 'It was great! Just finished some work. How about you?' },
       { sender: 'Saanyay', text: 'Same here, just got done with class. Want to hang out soon?' },
@@ -117,7 +117,7 @@
       { sender: 'Queen', text: 'Perfect! Can\'t wait 😊' }
     ];
 
-    const newConversationMessages = [
+    const secondConversation = [
       { sender: 'Saanyay', text: 'I had so much fun today!' },
       { sender: 'Queen', text: 'Same! I had a great time 😊' },
       { sender: 'Saanyay', text: 'Let\'s date?' },
@@ -125,7 +125,7 @@
     ];
 
     let currentMessage = 0;
-    let currentConversation = messages;
+    let currentConversation = firstConversation;
     const phoneScreen = document.getElementById('phoneScreen');
     const nextButton = document.getElementById('nextButton');
     const reloadButton = document.getElementById('reloadButton');
@@ -177,7 +177,12 @@
 
     // Click handler for the "Start New Conversation" button
     reloadButton.addEventListener('click', () => {
-      location.reload(); // Reload the page to restart the conversation
+      currentConversation = secondConversation; // Change to second conversation
+      currentMessage = 0; // Reset message index
+      phoneScreen.innerHTML = ''; // Clear current conversation
+      nextButton.style.display = 'block'; // Show the next button again
+      reloadButton.style.display = 'none'; // Hide reload button
+      loadNextMessage(); // Load the new conversation
     });
 
     // Start the initial conversation
